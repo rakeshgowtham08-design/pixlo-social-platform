@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}@{{ profile_user.username }}{% endblock %}
+{% block content %}
+<section class="profile-cover"><div class="profile-spark spark-a">✦</div><div class="profile-spark spark-b">✿</div></section>
+<section class="profile-wrap">
+  <div class="profile-top"><div class="avatar profile-avatar">{% if profile_user.profile.avatar_url %}<img src="{{ profile_user.profile.avatar_url }}" alt="Profile avatar">{% else %}{{ profile_user.username|first|upper }}{% endif %}</div>
+  <div class="profile-controls">{% if user.is_authenticated and user == profile_user %}<a class="button button-outline" href="{% url 'edit_profile' %}">Edit profile ✎</a>{% elif user.is_authenticated %}<form method="post" action="{% url 'toggle_follow' profile_user.username %}">{% csrf_token %}<button class="button {% if is_following %}button-outline{% endif %}" type="submit">{% if is_following %}Following ✓{% else %}＋ Follow{% endif %}</button></form>{% else %}<a class="button" href="{% url 'login' %}">Log in to follow</a>{% endif %}</div></div>
+  <h1 class="profile-name">{{ profile_user.username }}</h1><p class="muted">@{{ profile_user.username }}</p><p class="profile-bio">{{ profile_user.profile.bio|default:"Still writing my story. ✨" }}</p>
+  <div class="profile-stats"><div><b>{{ post_count }}</b><span>posts</span></div><div><b>{{ follower_count }}</b><span>followers</span></div><div><b>{{ following_count }}</b><span>following</span></div></div>
+  <div class="section-title"><h2>Posts</h2><span class="small muted">A collection of moments</span></div>
+  <div class="profile-posts">{% for post in posts %}<article class="profile-post card">{% if post.image %}<img src="{{ post.image.url }}" alt="Post image">{% elif post.image_url %}<img src="{{ post.image_url }}" alt="Post image">{% else %}<div class="text-post-art">✦</div>{% endif %}<div class="profile-post-caption">{{ post.caption|default:"A moment worth sharing."|truncatechars:100 }}</div><div class="profile-post-meta">♡ {{ post.likes.count }} · {{ post.created_at|date:"M j, Y" }}</div></article>{% empty %}<div class="empty-state card"><h3>No posts yet</h3><p>When they share a moment, it'll show up here.</p></div>{% endfor %}</div>
+</section>
+{% endblock %}

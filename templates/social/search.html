@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block title %}Search people{% endblock %}
+{% block content %}
+<div class="search-page"><p class="eyebrow">DISCOVER YOUR PEOPLE</p><h1>Find your <span>community.</span></h1><form class="big-search" action="{% url 'search_users' %}" method="get"><span>⌕</span><input name="q" value="{{ query }}" placeholder="Search by username…" autofocus><button class="button" type="submit">Search</button></form>
+{% if query %}<h2 class="results-title">Results for “{{ query }}”</h2><div class="user-results">{% for result in users %}<a class="user-result card" href="{% url 'profile' result.username %}"><div class="avatar">{% if result.profile.avatar_url %}<img src="{{ result.profile.avatar_url }}" alt="">{% else %}{{ result.username|first|upper }}{% endif %}</div><div><b>@{{ result.username }}</b><p class="muted small">{{ result.profile.bio|default:"A member of the Pixlo community"|truncatechars:90 }}</p></div><span class="result-arrow">↗</span></a>{% empty %}<div class="empty-state card"><h3>No people found</h3><p>Try a different username.</p></div>{% endfor %}</div>{% else %}<div class="empty-state card"><div class="empty-icon">⌕</div><h3>Good connections start with a search.</h3><p>Search usernames to find people on Pixlo.</p></div>{% endif %}</div>
+{% endblock %}

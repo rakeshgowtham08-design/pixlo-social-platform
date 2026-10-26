@@ -1,0 +1,5 @@
+{% extends "base.html" %}
+{% block title %}Edit profile{% endblock %}
+{% block content %}
+<div class="form-page card"><p class="eyebrow">MAKE IT YOURS</p><h1>Edit your profile</h1><p class="muted">A few details help people get to know you.</p><form method="post" class="stack-form">{% csrf_token %}{{ form.as_p }}<div class="form-actions"><button class="button" type="submit">Save changes ↗</button><a class="button button-outline" href="{% url 'profile' user.username %}">Cancel</a></div></form></div>
+{% endblock %}

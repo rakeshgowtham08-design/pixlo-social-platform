@@ -1,0 +1,5 @@
+{% extends "base.html" %}
+{% block title %}Join Pixlo{% endblock %}
+{% block content %}
+<div class="auth-layout"><div class="auth-art"><div class="auth-art-orb">✦</div><p class="eyebrow">A PLACE TO BE YOU</p><h1>Your story.<br>Your people.</h1><p>Share your moments, find your community, and make the internet feel a little more human.</p><div class="art-sticker sticker-one">✿</div><div class="art-sticker sticker-two">♡</div></div><div class="auth-panel card"><p class="eyebrow">LET'S GET YOU IN</p><h2>Make yourself at home.</h2><p class="muted">Create your free Pixlo account.</p><form method="post" class="stack-form">{% csrf_token %}{{ form.as_p }}<button class="button full-button" type="submit">Create account <span>↗</span></button></form><p class="auth-switch">Already a member? <a href="{% url 'login' %}">Log in</a></p></div></div>
+{% endblock %}

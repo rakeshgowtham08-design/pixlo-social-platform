@@ -1,0 +1,5 @@
+{% extends "base.html" %}
+{% block title %}Log in{% endblock %}
+{% block content %}
+<div class="auth-layout"><div class="auth-art"><div class="auth-art-orb">✦</div><p class="eyebrow">WELCOME BACK</p><h1>Your world<br>is waiting.</h1><p>Pick up where you left off. The good stuff is happening here.</p><div class="art-sticker sticker-one">✿</div><div class="art-sticker sticker-two">✦</div></div><div class="auth-panel card"><p class="eyebrow">YOUR PIXLO ACCOUNT</p><h2>Good to see you.</h2><p class="muted">Log in to get back to your people.</p><form method="post" class="stack-form">{% csrf_token %}{{ form.as_p }}<button class="button full-button" type="submit">Log in <span>↗</span></button></form><p class="auth-switch">New around here? <a href="{% url 'signup' %}">Create an account</a></p></div></div>
+{% endblock %}
